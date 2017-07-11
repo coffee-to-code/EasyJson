@@ -1,9 +1,9 @@
 /**************************************************
  * EasyGson is open-sourced software licensed under the MIT license.
  * https://opensource.org/licenses/MIT
- */
+ ***************************************************/
 
-package com.easyGson;
+package com.easyJson;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -13,25 +13,25 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-public class EasyGson {
-	JsonObject wrappedJsonObject;
+public class EasyJson {
+	JsonElement wrappedJsonElement;
 
 	/**
 	 * 
 	 * @param json
 	 */
-	public EasyGson(JsonElement json) {
-		this.wrappedJsonObject = json.getAsJsonObject();
+	public EasyJson(JsonElement jsonElt) {
+		this.wrappedJsonElement = jsonElt;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public JsonObject getWrappedJsonObject() {
-		return wrappedJsonObject;
+	public JsonElement getWrappedJsonElement() {
+		return wrappedJsonElement;
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -61,7 +61,7 @@ public class EasyGson {
 			return jsonElt.getAsString();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -76,7 +76,7 @@ public class EasyGson {
 			return jsonElt.getAsBoolean();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -91,7 +91,7 @@ public class EasyGson {
 			return jsonElt.getAsFloat();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -106,7 +106,7 @@ public class EasyGson {
 			return jsonElt.getAsDouble();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -121,7 +121,7 @@ public class EasyGson {
 			return jsonElt.getAsLong();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -136,7 +136,7 @@ public class EasyGson {
 			return jsonElt.getAsBigDecimal();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -151,7 +151,7 @@ public class EasyGson {
 			return jsonElt.getAsBigInteger();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -166,7 +166,7 @@ public class EasyGson {
 			return jsonElt.getAsByte();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -181,7 +181,7 @@ public class EasyGson {
 			return jsonElt.getAsCharacter();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -196,7 +196,7 @@ public class EasyGson {
 			return jsonElt.getAsNumber();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -217,18 +217,66 @@ public class EasyGson {
 	 * @param path
 	 * @param consumer
 	 */
-	public void iterate(String path, Consumer<JsonElement> consumer) {
+	public void iterate(String path, Consumer<EasyJson> consumer) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt != null && !jsonElt.isJsonNull() && jsonElt instanceof JsonArray) {
 			JsonArray arr = jsonElt.getAsJsonArray();
-			
+
 			for (JsonElement arrElt : arr) {
-				consumer.accept(arrElt);
-			}			
+				consumer.accept(new EasyJson(arrElt));
+			}
 		}
 	}
-	
+
+	/**
+	 * 
+	 * @param path
+	 * @param consumer
+	 */
+	public void iterateRaw(String path, Consumer<JsonElement> consumer) {
+		JsonElement jsonElt = getLastJsonEltInPath(path);
+
+		if (jsonElt != null && !jsonElt.isJsonNull() && jsonElt instanceof JsonArray) {
+			JsonArray arr = jsonElt.getAsJsonArray();
+
+			for (JsonElement arrElt : arr) {
+				consumer.accept(arrElt);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param consumer
+	 */
+	public void iterate(Consumer<EasyJson> consumer) {
+		JsonElement jsonElt = this.wrappedJsonElement;
+
+		if (jsonElt != null && !jsonElt.isJsonNull() && jsonElt instanceof JsonArray) {
+			JsonArray arr = jsonElt.getAsJsonArray();
+
+			for (JsonElement arrElt : arr) {
+				consumer.accept(new EasyJson(arrElt));
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param consumer
+	 */
+	public void iterateRaw(Consumer<JsonElement> consumer) {
+		JsonElement jsonElt = this.wrappedJsonElement;
+
+		if (jsonElt != null && !jsonElt.isJsonNull() && jsonElt instanceof JsonArray) {
+			JsonArray arr = jsonElt.getAsJsonArray();
+
+			for (JsonElement arrElt : arr) {
+				consumer.accept(arrElt);
+			}
+		}
+	}
 
 	/**
 	 * 
@@ -244,7 +292,7 @@ public class EasyGson {
 			return jsonElt.getAsJsonObject();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -259,7 +307,7 @@ public class EasyGson {
 			return jsonElt.getAsJsonArray();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -267,7 +315,7 @@ public class EasyGson {
 	 */
 	private JsonElement getLastJsonEltInPath(String path) {
 		String[] properties = path.split("\\.");
-		JsonObject jsonObj = this.wrappedJsonObject;
+		JsonObject jsonObj = this.wrappedJsonElement.getAsJsonObject();
 		int len = properties.length - 1;
 
 		for (int i = 0; i < len; i++) {
