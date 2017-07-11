@@ -1,14 +1,18 @@
 package com.easyJson;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.junit.Test;
 
-import com.easyJson.EasyJson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -31,6 +35,19 @@ public class TestBasic {
 				String str = ejson.getString("value");
 				assertNotNull(str);
 		});
+	}
+	
+	@Test
+	public void testOneBook() {
+		EasyJson easyJson = this.getEasyJson("one-book.json");
+		
+		assertEquals(easyJson.getString("book.author.first_name"), "Rick");
+		
+		JsonElement jsonElt = easyJson.getWrappedJsonElement();
+		
+		String firstName = jsonElt.getAsJsonObject().get("book").getAsJsonObject().get("author").getAsJsonObject().get("first_name").getAsString();
+		
+		assertEquals(firstName, "Rick");			
 	}
 	
 	@Test
@@ -69,15 +86,19 @@ public class TestBasic {
 	 * 
 	 * @param resourceName name of a file under src/test/resources
 	 * @return
+	 * @throws IOException 
 	 */
 	private EasyJson getEasyJson(String resourceName) {
 		InputStream resourceAsStream = this.getClass().getResourceAsStream("./../../" + resourceName);		
 		Reader reader = new InputStreamReader(resourceAsStream);		
-		JsonElement jsonElt = (new JsonParser()).parse(reader);
 		
-		EasyJson easyGson = new EasyJson(jsonElt);
-		
-		return easyGson;
+		try {
+			EasyJson easyGson = EasyJson.parse(reader);
+			return easyGson;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
