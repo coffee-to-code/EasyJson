@@ -5,11 +5,6 @@
 
 package com.easyJson;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.function.Consumer;
@@ -17,7 +12,6 @@ import java.util.function.Consumer;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class EasyJson {
 	JsonElement wrappedJsonElement;
@@ -44,14 +38,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public Integer getInteger(String path) {
+	public Integer getInteger(String path, Integer defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsInt();
 		}
+	}
+	
+	public Integer getInteger(String path) {
+		return this.getInteger(path, null);
 	}
 	
 	/**
@@ -67,14 +65,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public String getString(String path) {
+	public String getString(String path, String defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsString();
 		}
+	}
+	
+	public String getString(String path) {
+		return this.getString(path, null);
 	}
 	
 	/**
@@ -90,14 +92,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public Boolean getBoolean(String path) {
+	public Boolean getBoolean(String path, Boolean defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsBoolean();
 		}
+	}
+	
+	public Boolean getBoolean(String path) {
+		return this.getBoolean(path, null);
 	}
 	
 	/**
@@ -113,14 +119,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public Float getFloat(String path) {
+	public Float getFloat(String path, Float defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsFloat();
 		}
+	}
+	
+	public Float getFloat(String path) {
+		return this.getFloat(path, null);
 	}
 
 	/**
@@ -128,14 +138,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public Double getDouble(String path) {
+	public Double getDouble(String path, Double defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsDouble();
 		}
+	}
+	
+	public Double getDouble(String path) {
+		return this.getDouble(path, null);
 	}
 	
 	/**
@@ -151,14 +165,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public Long getLong(String path) {
+	public Long getLong(String path, Long defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsLong();
 		}
+	}
+	
+	public Long getLong(String path) {
+		return this.getLong(path, null);
 	}
 
 	/**
@@ -174,14 +192,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public BigDecimal getBigDecimal(String path) {
+	public BigDecimal getBigDecimal(String path, BigDecimal defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsBigDecimal();
 		}
+	}
+	
+	public BigDecimal getBigDecimal(String path) {
+		return this.getBigDecimal(path, null);
 	}
 	
 	/**
@@ -197,14 +219,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public BigInteger getBigInteger(String path) {
+	public BigInteger getBigInteger(String path, BigInteger defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsBigInteger();
 		}
+	}
+	
+	public BigInteger getBigInteger(String path) {
+		return this.getBigInteger(path, null);
 	}
 	
 	/**
@@ -220,14 +246,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public Byte getByte(String path) {
+	public Byte getByte(String path, Byte defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsByte();
 		}
+	}
+	
+	public Byte getByte(String path) {
+		return this.getByte(path, null);
 	}
 	
 	/**
@@ -243,14 +273,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public Character getCharacter(String path) {
+	public Character getCharacter(String path, Character defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsCharacter();
 		}
+	}
+	
+	public Character getCharacter(String path) {
+		return this.getCharacter(path, null);
 	}
 	
 	/**
@@ -266,14 +300,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public Number getNumber(String path) {
+	public Number getNumber(String path, Number defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsNumber();
 		}
+	}
+	
+	public Number getNumber(String path) {
+		return this.getNumber(path, null);
 	}
 	
 	/**
@@ -289,14 +327,18 @@ public class EasyJson {
 	 * @param path
 	 * @return
 	 */
-	public Short getShort(String path) {
+	public Short getShort(String path, Short defaultVal) {
 		JsonElement jsonElt = getLastJsonEltInPath(path);
 
 		if (jsonElt == null || jsonElt.isJsonNull()) {
-			return null;
+			return defaultVal;
 		} else {
 			return jsonElt.getAsShort();
 		}
+	}
+	
+	public Short getShort(String path) {
+		return this.getShort(path, null);
 	}
 	
 	/**
