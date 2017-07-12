@@ -61,6 +61,10 @@ For each primitive type there is a correspondend `get...` method, for example:
     ej.getFloat("book.price");          // => 12.50
     ej.getInteger("book.pages_i");      // => 384
 
+For each get_Type_() method, you can supply an optional default value to be returned in case the property is null or missing:
+
+    ej.getInteger("book.pages_i", 100);
+
 ## Iterate
 
 Let's start with a simple JSON array:
