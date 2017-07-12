@@ -30,44 +30,7 @@ public class EasyJson {
 		this.wrappedJsonElement = jsonElt;
 	}
 	
-	/**
-	 * 
-	 * @param jsonStr
-	 * @return
-	 */
-	public static EasyJson parse(String jsonStr) {
-		JsonElement jsonElt = new JsonParser().parse(jsonStr);		
-		return new EasyJson(jsonElt);
-	}
 	
-	/**
-	 * 
-	 * @param jsonFile
-	 * @return
-	 * @throws IOException
-	 */
-	public static EasyJson parse(File jsonFile) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(jsonFile));
-		
-		try {
-			JsonElement jsonElt = new JsonParser().parse(reader);
-			return new EasyJson(jsonElt);
-		} finally {
-			reader.close();
-		}
-	} 
-	
-	/**
-	 * 
-	 * @param reader
-	 * @return
-	 * @throws IOException
-	 */
-	public static EasyJson parse(Reader reader) throws IOException {
-		JsonElement jsonElt = new JsonParser().parse(reader);
-		return new EasyJson(jsonElt);
-	} 
-
 	/**
 	 * 
 	 * @return
@@ -90,6 +53,14 @@ public class EasyJson {
 			return jsonElt.getAsInt();
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Integer getInteger() {
+		return this.wrappedJsonElement.getAsInt();
+	}
 
 	/**
 	 * 
@@ -105,6 +76,14 @@ public class EasyJson {
 			return jsonElt.getAsString();
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getString() {
+		return this.wrappedJsonElement.getAsString();
+	}
 
 	/**
 	 * 
@@ -119,6 +98,14 @@ public class EasyJson {
 		} else {
 			return jsonElt.getAsBoolean();
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Boolean getBoolean() {
+		return this.wrappedJsonElement.getAsBoolean();
 	}
 
 	/**
@@ -150,6 +137,14 @@ public class EasyJson {
 			return jsonElt.getAsDouble();
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Double getDouble() {
+		return this.wrappedJsonElement.getAsDouble();
+	}
 
 	/**
 	 * 
@@ -168,6 +163,14 @@ public class EasyJson {
 
 	/**
 	 * 
+	 * @return
+	 */
+	public Long getLong() {
+		return this.wrappedJsonElement.getAsLong();
+	}
+
+	/**
+	 * 
 	 * @param path
 	 * @return
 	 */
@@ -179,6 +182,14 @@ public class EasyJson {
 		} else {
 			return jsonElt.getAsBigDecimal();
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public BigDecimal getBigDecimal() {
+		return this.wrappedJsonElement.getAsBigDecimal();
 	}
 
 	/**
@@ -195,6 +206,14 @@ public class EasyJson {
 			return jsonElt.getAsBigInteger();
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public BigInteger getBigInteger() {
+		return this.wrappedJsonElement.getAsBigInteger();
+	}
 
 	/**
 	 * 
@@ -209,6 +228,14 @@ public class EasyJson {
 		} else {
 			return jsonElt.getAsByte();
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Byte getByte() {
+		return this.wrappedJsonElement.getAsByte();
 	}
 
 	/**
@@ -225,6 +252,14 @@ public class EasyJson {
 			return jsonElt.getAsCharacter();
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Character getCharacter() {
+		return this.wrappedJsonElement.getAsCharacter();
+	}
 
 	/**
 	 * 
@@ -240,6 +275,14 @@ public class EasyJson {
 			return jsonElt.getAsNumber();
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Number getNumber() {
+		return this.wrappedJsonElement.getAsNumber();
+	}
 
 	/**
 	 * 
@@ -254,6 +297,14 @@ public class EasyJson {
 		} else {
 			return jsonElt.getAsShort();
 		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Short getShort() {
+		return this.wrappedJsonElement.getAsShort();
 	}
 
 	/**

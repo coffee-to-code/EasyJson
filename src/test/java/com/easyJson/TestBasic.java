@@ -79,6 +79,11 @@ public class TestBasic {
 			String name = jsonElt.getAsString();
 			assertTrue(name.equals("Jon") || name.equals("Ritchie") || name.equals("Ian"));
 		});
+		
+		easyJson.iterate(ej -> {
+			String name = ej.getString();
+			assertTrue(name.equals("Jon") || name.equals("Ritchie") || name.equals("Ian"));
+		});
 	}
 	
 	/**
@@ -93,7 +98,7 @@ public class TestBasic {
 		Reader reader = new InputStreamReader(resourceAsStream);		
 		
 		try {
-			EasyJson easyGson = EasyJson.parse(reader);
+			EasyJson easyGson = EasyJsonParser.parse(reader);
 			return easyGson;
 		} catch (IOException e) {
 			e.printStackTrace();
